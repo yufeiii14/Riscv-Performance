@@ -1,0 +1,21 @@
+Global frequency set at 1000000000000 ticks per second
+warn: No dot file generated. Please install pydot to generate the dot file and pdf.
+src/mem/dram_interface.cc:690: warn: DRAM device capacity (8192 Mbytes) does not match the address range assigned (512 Mbytes)
+src/arch/riscv/linux/se_workload.cc:60: warn: Unknown operating system; assuming Linux.
+src/base/statistics.hh:279: warn: One of the stats is a legacy stat. Legacy stat is a stat that does not belong to any statistics::Group. Legacy stat is deprecated.
+src/base/remote_gdb.cc:418: warn: Sockets disabled, not accepting gdb connections
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 23.0.0.1
+gem5 compiled Oct  6 2026 15:22:06
+gem5 started Nov 10 2026 14:39:50
+gem5 executing on LAPTOP-OC4L6BM6, pid 7443
+command line: /home/yufei/riscv-gem5-project/gem5/build/RISCV/gem5.opt -d /home/yufei/riscv-gem5-project/results/ROI_final/wikisort_O2_C2 /home/yufei/riscv-gem5-project/configs/cache_test.py --dcache-size 32kB --binary /home/yufei/riscv-gem5-project/build/embench_ROI_O2/src/wikisort/wikisort
+
+info: Standard input is not a terminal, disabling listeners.
+Beginning simulation!
+src/sim/simulate.cc:194: info: Entering event queue @ 0.  Starting simulation...
+src/sim/mem_state.cc:443: info: Increasing stack size by one page.
+Exiting @ tick 6671691000 because exiting with last active thread context
+Exit code: 0

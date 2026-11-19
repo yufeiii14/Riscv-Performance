@@ -1,0 +1,25 @@
+# Simulator and build outputs
+gem5/
+build/
+m5out/
+*.o
+*.a
+*.so
+*.elf
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Temporary files
+*.tmp
+*.bak
+*~
+.DS_Store
+
+# Editor files
+.vscode/
+.idea/
+results/regenerated/

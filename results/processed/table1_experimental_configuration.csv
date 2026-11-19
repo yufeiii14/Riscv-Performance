@@ -1,0 +1,12 @@
+Parameter,Setting
+ISA,RISC-V RV64GC
+Simulation,gem5 SE mode
+CPU,TimingSimpleCPU
+Clock,1 GHz
+L1 Instruction Cache,32 KB
+L1 Data Cache,16 / 32 / 64 KB
+L2 Cache,None
+Compiler Optimization,-O0 / -O2 / -O3 / -Os
+Benchmarks,matmult-int / crc32 / wikisort
+Measurement,ROI after cache warm-up
+Experiments,36
