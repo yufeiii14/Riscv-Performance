@@ -1,8 +1,8 @@
 # RISC-V Compiler Optimization and Cache Performance
 
-This project examines how GCC optimization levels and L1 data cache capacity affect the execution of RISC-V programs. Three Embench-IoT workloads were evaluated using gem5, with performance compared through execution cycles, instruction counts, IPC, CPI, cache miss rates, and code size.
+Using gem5 and Embench-IoT, I tested how GCC optimization levels and L1 data cache size affect three RISC-V workloads. The study includes 36 main configurations, four additional small-cache runs, and an assembly comparison of `matmult-int` at `-O2` and `-O3`.
 
-The experiments include 36 compiler/cache configurations, four additional small-cache tests, and a RISC-V assembly comparison to investigate an unexpected performance regression at `-O3`.
+Two results stood out. With a 32 KB L1D cache, `-O3` took **45.01% more cycles** than `-O2` for `matmult-int`. At `-O2`, reducing L1D capacity from 64 KB to 4 KB increased execution cycles by **12.50%**. Instruction counts, CPI, cache misses, code size, and RISC-V assembly were examined to understand these differences.
 
 ## Experimental Setup
 
@@ -43,6 +43,8 @@ For matmult-int, `-O3` increased execution cycles by 45.01% relative to `-O2`, d
 
 Instruction count helps explain the difference: `-O3` executed 36.75% more instructions and had a 6.04% higher CPI. Disassembly showed differences in loop organization, function inlining, and result-element updates. These observations are consistent with the regression but do not isolate the cost of individual compiler transformations.
 
+![Dynamic instruction counts](results/figures/figure3_compiler_instructions.png)
+
 The `-Os` setting produced the smallest `.text` section for all three benchmarks, although it was not the fastest configuration. This illustrates the trade-off between code footprint and execution performance.
 
 ### Cache Performance
@@ -80,7 +82,9 @@ The repository includes all eight final figures in both PNG and PDF formats.
 | [7](results/figures/figure7_compiler_cache_heatmap.png) | Compiler/cache performance comparison |
 | [8](results/figures/figure8_cache_sensitivity.png) | Small-cache sensitivity |
 
-Raw gem5 statistics and configuration files are under `results/raw/`. Verified CSV results and summary tables are under `results/processed/`.
+Complete numerical results are available in the [verified 36-run dataset](results/processed/roi_results_verified.csv), [performance summary](results/processed/table2_performance_summary.csv), and [cache sensitivity table](results/processed/table3_cache_sensitivity.csv).
+
+The original gem5 statistics and configurations are preserved in [main experiments](results/raw/main/) and [small-cache experiments](results/raw/cache_sensitivity/). The simulation setup is defined in [cache_test.py](configs/cache_test.py).
 
 ## Scripts and Reproduction
 
@@ -102,7 +106,9 @@ Regenerated output is saved under `results/regenerated/`, separate from the orig
 
 The repository also includes `scripts/extract_roi_results.py` for extracting statistics using an existing RISC-V binary build directory and `scripts/run_gem5.sh` for launching individual simulations.
 
-The original 40 simulation outputs are preserved. The main data extraction, analysis, and verification scripts have been tested. Full reproduction from Embench source still requires the matching cross-compiler, build configuration, and gem5 environment; the original build information and remaining limitations are documented in [build notes](docs/build_notes.md).
+The original 40 simulation outputs are preserved. The main data extraction, verification, and base analysis scripts have been tested. The seven base analysis figures and two tables can be regenerated without rerunning gem5; the final figures are preserved separately.
+
+Full reproduction from Embench source has not yet been verified because the exact final ROI build procedure still needs confirmation. The available toolchain information and remaining gaps are recorded in [build notes](docs/build_notes.md).
 
 ## Limitations
 
